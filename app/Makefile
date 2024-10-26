@@ -34,4 +34,4 @@ check-deps:
 
 build-run: build run
 
-.PHONY: buildma
+.PHONY: build
