@@ -2,25 +2,32 @@ package hexlet.code;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 
 
 //описание команды для picocli
 @Command(name = "gendiff", version = "gendiff 1.0", mixinStandardHelpOptions = true,
-        description = "Compares two configuration files and shows a difference.")
-
+        description = "Compares two configuration files and shows a difference." +
+                "       \n filepath1         path to first file" +
+                "       \n filepath2         path to second file")
 
 public class App implements Runnable{
 
-    /*Опции в нашем случае не используются
-    @Option(names = { "-s", "--font-size" }, description = "Font size")
-    int fontSize = 19;
-     */
+    //Опции
 
-    /*Параметры в нашем случае не используются
-    @Parameters(paramLabel = "<word>", defaultValue = "Hello, picocli",
-            description = "Words to be translated into ASCII art.")
-    private String[] words = { "Hello,", "picocli" };
-     */
+    @Option(names = { "-f", "--format" }, paramLabel = "format",
+            description = "output format [default: stylish]",defaultValue = "stylish")
+    private String format;
+
+
+    //Параметры в нашем случае не используются
+    @Parameters(paramLabel = "filepath1", description = "path to first file")
+    private String filepath1;
+    @Parameters(paramLabel = "filepath2", description = "path to second file")
+    private String filepath2;
+
+
     @Override
     public void run() {
         // The business logic of the command goes here...
