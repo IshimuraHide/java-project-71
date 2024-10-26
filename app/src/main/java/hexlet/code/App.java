@@ -27,7 +27,6 @@ public class App implements Runnable{
     @Parameters(paramLabel = "filepath2", description = "path to second file")
     private String filepath2;
 
-
     @Override
     public void run() {
         // The business logic of the command goes here...
