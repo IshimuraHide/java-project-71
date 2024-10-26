@@ -1,10 +1,13 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.*;
 
 
 //описание команды для picocli
@@ -24,14 +27,21 @@ public class App implements Runnable{
 
     //Параметры в нашем случае не используются
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    private String filepath1;
+    String filepath1 = "src/main/resources/file1.json";
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    private String filepath2;
+    String filepath2 = "src/main/resources/file2.json";
 
     @Override
     public void run() {
         // The business logic of the command goes here...
-        ObjectMapper mapper = new ObjectMapper();
+        String json = "src/main/resources/file1.json";
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            Map<String, Object> map      = objectMapper.readValue(json, new TypeReference<Map<String,Object>>(){});
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
         // (omitted for the sake of brevity).
     }
     public static void main(String[] args) {
