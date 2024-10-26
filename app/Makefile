@@ -12,8 +12,9 @@ build:
 install:
 	./gradlew clean install
 
+# запуск исполняемого файла полученного в результате сборки
 run-dist:
-	./build/install/java-package/bin/java-package
+	./build/install/app/bin/app
 
 run:
 	./gradlew run
