@@ -4,6 +4,7 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 //описание команды для picocli
@@ -30,7 +31,7 @@ public class App implements Runnable{
     @Override
     public void run() {
         // The business logic of the command goes here...
-        // In this case, code for generation of ASCII art graphics
+        ObjectMapper mapper = new ObjectMapper();
         // (omitted for the sake of brevity).
     }
     public static void main(String[] args) {
