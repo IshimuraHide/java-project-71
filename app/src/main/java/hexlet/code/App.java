@@ -41,7 +41,7 @@ public class App implements Callable<String> {
         //System.out.println(hexlet.code.Parser.parseFileToMap(mypath).toString());
         System.out.println(generateDifferences(filepath1,filepath2));
 
-        return "Works fine!";
+        return "Sucess";
     }
 
     public static void main(String[] args) {
