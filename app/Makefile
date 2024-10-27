@@ -31,6 +31,9 @@ lint:
 check-deps:
 	./gradlew dependencyUpdates -Drevision=release
 
+help:
+	./build/install/app/bin/app -h
+
 
 build-run: build run
 

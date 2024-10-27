@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.Parser.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import picocli.CommandLine;
@@ -8,48 +9,52 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.*;
+import java.util.concurrent.Callable;
+
+import static  hexlet.code.GenDiff.generateDifferences;
 
 
 //описание команды для picocli
-@Command(name = "gendiff", version = "gendiff 1.0", mixinStandardHelpOptions = true,
+@Command(name = "genDiff", version = "genDiff 1.0", mixinStandardHelpOptions = true,
         description = "Compares two configuration files and shows a difference." +
                 "       \n filepath1         path to first file" +
                 "       \n filepath2         path to second file")
 
-public class App implements Runnable{
-
+public class App implements Callable<String> {
+    //Параметры
+    @Parameters(paramLabel = "filepath1", description = "path to first file")
+    //private static String filepath1 = "app/src/main/resources/file1.json";
+    private static String filepath1;
+    @Parameters(paramLabel = "filepath2", description = "path to second file")
+    private String filepath2;
     //Опции
 
     @Option(names = { "-f", "--format" }, paramLabel = "format",
             description = "output format [default: stylish]",defaultValue = "stylish")
-    private String format;
+    private String format = "stylish";
 
-
-    //Параметры в нашем случае не используются
-    @Parameters(paramLabel = "filepath1", description = "path to first file")
-    String filepath1 = "src/main/resources/file1.json";
-    @Parameters(paramLabel = "filepath2", description = "path to second file")
-    String filepath2 = "src/main/resources/file2.json";
 
     @Override
-    public void run() {
-        // The business logic of the command goes here...
-        String json = "src/main/resources/file1.json";
-        ObjectMapper objectMapper = new ObjectMapper();
+    public String call() throws Exception {
+        String mypath = "\\\\wsl$\\Ubuntu\\root\\project\\java-project-71\\app\\src\\main\\resources\\file1.json";
+
+        //System.out.println(hexlet.code.Parser.parseFileToMap(mypath).toString());
+        System.out.println(generateDifferences(filepath1,filepath2));
+
+        return "Works fine!";
+    }
+
+    public static void main(String[] args) {
         try {
-            Map<String, Object> map      = objectMapper.readValue(json, new TypeReference<Map<String,Object>>(){});
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            int exitCode = new CommandLine(new App()).execute(args);
+            System.out.println("Hello world!");
+            System.exit(exitCode);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
-        // (omitted for the sake of brevity).
     }
-    public static void main(String[] args) {
-        int exitCode = new CommandLine(new App()).execute(args);
-        System.out.println("Hello world!");
-        System.exit(exitCode);
 
-    }
 
 
 }
