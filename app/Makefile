@@ -14,7 +14,10 @@ install:
 
 # запуск исполняемого файла полученного в результате сборки
 run-dist:
-	./build/install/app/bin/app
+	./build/install/app/bin/app file1.json file2.json
+
+run-dist-ymll:
+	./build/install/app/bin/app file1.yml file2.yml
 
 run:
 	./gradlew run

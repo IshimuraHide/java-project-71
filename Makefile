@@ -1,9 +1,7 @@
 .DEFAULT_GOAL := build-run
 
 report:
-	.app/gradlew jacocoTestReport
-
-
+	make -C app report
 
 build-run: build run
 
