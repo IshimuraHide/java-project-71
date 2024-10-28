@@ -1,0 +1,27 @@
+# file: .github/workflows/say-hello.yml
+name: build
+# on – определяет события, которые запускают воркфлоу
+on: push
+jobs:
+  # build – произвольно выбранное имя задания
+  # их может быть больше одного
+  build:
+    # операционная система для работы воркфлоу
+    runs-on: ubuntu-latest
+    steps: # список шагов, которые надо выполнить
+      # экшен — выполняет какую-то задачу
+      # checkout — клонирует репозиторий
+      - uses: actions/checkout@v4
+      # run – произвольная bash-команда
+      # ls -la выведет содержимое текущего репозитория
+      - run: make build
+      - run: make test
+      - run: make checkstyle
+      # - name: Publish code coverage
+      #   uses: paambaati/codeclimate-action@v9.0.0
+      #   env:
+      #     CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+      #     JACOCO_SOURCE_PATH: ${{github.workspace}}/app/src/main/java
+      #   with:
+      #     coverageCommand: make report
+      #     coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
