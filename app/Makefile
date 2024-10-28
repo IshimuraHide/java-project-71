@@ -35,6 +35,10 @@ help:
 	./build/install/app/bin/app -h
 
 
+checkstyle:
+	gradle checkstyleMain
+
+
 build-run: build run
 
 .PHONY: build

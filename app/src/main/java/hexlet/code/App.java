@@ -1,3 +1,4 @@
+
 package hexlet.code;
 
 import picocli.CommandLine;
@@ -12,9 +13,9 @@ import static  hexlet.code.Differ.generate;
 
 //описание команды для picocli
 @Command(name = "genDiff", version = "genDiff 1.0", mixinStandardHelpOptions = true,
-        description = "Compares two configuration files and shows a difference." +
-                "       \n filepath1         path to first file" +
-                "       \n filepath2         path to second file")
+        description = "Compares two configuration files and shows a difference."
+                + "       \n filepath1         path to first file"
+                + "       \n filepath2         path to second file")
 
 public class App implements Callable<String> {
     //Параметры
@@ -26,13 +27,12 @@ public class App implements Callable<String> {
     //Опции
 
     @Option(names = { "-f", "--format" }, paramLabel = "format",
-            description = "output format [default: stylish]",defaultValue = "stylish")
+            description = "output format [default: stylish]", defaultValue = "stylish")
     private String format = "stylish";
-
 
     @Override
     public String call() throws Exception {
-        System.out.println(generate(filepath1,filepath2));
+        System.out.println(generate(filepath1, filepath2));
         return "Sucess";
     }
 
@@ -44,9 +44,6 @@ public class App implements Callable<String> {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
-
-
 
 }

@@ -1,10 +1,13 @@
 package hexlet.code;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static hexlet.code.Parser.parseFileToMap;
 
 public class Differ {
-    public static String generate(String path1, String path2 ) throws Exception {
+    public static String generate(String path1, String path2) throws Exception {
         Map<String, Object> file1 = parseFileToMap(path1);
         Map<String, Object> file2 = parseFileToMap(path2);
         Map<String, Object> result = new LinkedHashMap<>();
