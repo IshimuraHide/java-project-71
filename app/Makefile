@@ -27,6 +27,8 @@ test:
 
 report:
 	./gradlew jacocoTestReport
+	./gradlew JacocoCoverageVerification
+
 
 lint:
 	./gradlew checkstyleMain

@@ -3,7 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     application
-    id("jacoco")
+    jacoco
     id("java")
     id("checkstyle")
 }
@@ -25,6 +25,7 @@ dependencies {
     implementation ("com.fasterxml.jackson.core:jackson-databind:2.18.0")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly ("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.test {
@@ -39,4 +40,14 @@ tasks.test {
     }
 }
 
-tasks.jacocoTestReport { reports { xml.required.set(true) } }
+tasks.jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+    }
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+}
