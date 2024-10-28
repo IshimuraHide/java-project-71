@@ -1,17 +1,13 @@
 package hexlet.code;
 
-import hexlet.code.Parser.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.*;
+
 import java.util.concurrent.Callable;
 
-import static  hexlet.code.GenDiff.generateDifferences;
+import static  hexlet.code.Differ.generate;
 
 
 //описание команды для picocli
@@ -36,18 +32,14 @@ public class App implements Callable<String> {
 
     @Override
     public String call() throws Exception {
-        String mypath = "\\\\wsl$\\Ubuntu\\root\\project\\java-project-71\\app\\src\\main\\resources\\file1.json";
-
-        //System.out.println(hexlet.code.Parser.parseFileToMap(mypath).toString());
-        System.out.println(generateDifferences(filepath1,filepath2));
-
+        System.out.println(generate(filepath1,filepath2));
         return "Sucess";
     }
 
     public static void main(String[] args) {
         try {
             int exitCode = new CommandLine(new App()).execute(args);
-            System.out.println("Hello world!");
+           // System.out.println("Hello world!");
             System.exit(exitCode);
         } catch (Exception e) {
             System.out.println(e.getMessage());
