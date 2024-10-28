@@ -12,16 +12,17 @@ jobs:
       # экшен — выполняет какую-то задачу
       # checkout — клонирует репозиторий
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - name: setup JDK
+        uses: actions/setup-java@v4
         with:
             java-version: '21'
             distribution: 'temurin'
-      - uses: gradle/gradle-build-action@v3
+      - name: validate Gradle Wrapper
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: build
-          build-root-directory: app
-      - run: ./gradlew checkstyleMain
-      - run: ./gradlew test
+        #  build-root-directory: app
+
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v9.0.0
         env:
@@ -29,4 +30,4 @@ jobs:
          JACOCO_SOURCE_PATH: ${{github.workspace}}/app/src/main/java
         with:
           coverageCommand: make report
-          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+          coverageLocations: ${{github.workspace}}app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
